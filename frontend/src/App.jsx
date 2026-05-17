@@ -1,9 +1,8 @@
-import Students from "./pages/Students"
+import Login from "./pages/Login"
 
 function App() {
 
-  return <Students />
-
+  return <Login />
 }
 
 export default App
