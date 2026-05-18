@@ -1,15 +1,17 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
-import { loginUser } from "../services/authservices"
-function Login() {
+import { RegisterUser } from "../services/authservices"
+
+function Register() {
+
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
 
+        username: "",
         email: "",
         password: ""
     })
-    const navigate = useNavigate()
 
     const handleChange = (e) => {
 
@@ -26,20 +28,17 @@ function Login() {
 
         try {
 
-            const data = await loginUser(formData)
+            await RegisterUser(formData)
 
-            localStorage.setItem(
-                "token",
-                data.access_token
-            )
+            alert("Account Created 🔥")
 
-            navigate("/dashboard")
+            navigate("/")
 
         } catch (error) {
 
             console.log(error)
 
-            alert("Login Failed")
+            alert("Register Failed")
         }
     }
 
@@ -54,9 +53,17 @@ function Login() {
 
                 <h1 className="text-white text-4xl mb-8 font-bold">
 
-                    Login
+                    Register
 
                 </h1>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    onChange={handleChange}
+                    className="w-full mb-5 p-4 rounded-xl bg-[#131F4C] text-white outline-none"
+                />
 
                 <input
                     type="email"
@@ -78,23 +85,9 @@ function Login() {
                     className="w-full bg-blue-600 hover:bg-blue-700 p-4 rounded-xl text-white font-bold"
                 >
 
-                    Login
+                    Register
 
                 </button>
-                <p className="text-gray-400 mt-5 text-center">
-
-    Don't have an account?
-
-    <Link
-        to="/register"
-        className="text-blue-400 ml-2"
-    >
-
-        Register
-
-    </Link>
-
-</p>
 
             </form>
 
@@ -102,4 +95,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Register
