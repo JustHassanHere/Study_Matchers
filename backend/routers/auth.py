@@ -72,9 +72,10 @@ def login(user: LoginUser):
 
     access_token = create_access_token(
     data={
-        "sub": user["email"],
-        "role": user["role"]
-    }
+    "sub": db_user["email"],
+    "role": db_user.get("role", "student")
+}
+    
 )
     return {
         "access_token": access_token,

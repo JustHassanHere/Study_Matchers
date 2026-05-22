@@ -1,4 +1,4 @@
-import API from "../api/axios"
+import API from "../api/axiosInstance"
 
 export const getStudents = async () => {
     return await API.get("/students")

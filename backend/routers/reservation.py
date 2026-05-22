@@ -15,8 +15,24 @@ from utils.auth_dependency import (
     get_current_user
 )
 
+
+
+
 router = APIRouter()
 
+
+@router.get("/reservations")
+def get_user_reservations(
+    current_user = Depends(get_current_user)
+):
+    # Find all reservations belonging to the logged-in student
+    user_reservations = list(
+        reservation_collection.find(
+            {"student_email": current_user["email"]},
+            {"_id": 0}
+        )
+    )
+    return user_reservations
 
 @router.post("/reserve")
 def reserve_training(

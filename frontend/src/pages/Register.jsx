@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { RegisterUser } from "../services/authservices"
+import { registerUser } from "../services/authservices"
 
 function Register() {
 
@@ -28,18 +28,16 @@ function Register() {
 
         try {
 
-            await RegisterUser(formData)
+            await registerUser(formData)
 
             alert("Account Created 🔥")
 
             navigate("/")
 
         } catch (error) {
-
-            console.log(error)
-
-            alert("Register Failed")
-        }
+    console.log(error.response?.data || error)
+    alert("Register Failed")
+    }
     }
 
     return (
