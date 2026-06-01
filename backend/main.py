@@ -16,6 +16,11 @@ from routers.reservation import (
     router as reservation_router
 )
 
+from routers.matching import (
+    router as matching_router
+)
+
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
